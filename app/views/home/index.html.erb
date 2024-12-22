@@ -1,0 +1,34 @@
+<%# Display the current logged-in user's email %>
+<p>Logged in as: <%= current_user.email if user_signed_in? %></p>
+
+<%# SQL Injection search form %>
+<h2>SQL Injection Demonstration</h2>
+<%= form_tag home_search_sql_injection_path, method: :get do %>
+  <%= text_field_tag :username_sql, params[:username_sql], placeholder: "Enter email or SQL code" %>
+  <%= submit_tag "Search SQL" %>
+<% end %>
+
+<% if @results_sql.present? %>
+  <h3>SQL Injection Results</h3>
+  <ul>
+    <% @results_sql.each do |row| %>
+      <li><%= row %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%# XSS search form %>
+<h2>Cross-Site Scripting (XSS) Demonstration</h2>
+<%= form_tag home_search_xss_path, method: :get do %>
+  <%= text_field_tag :username_xss, params[:username_xss], placeholder: "Enter XSS payload" %>
+  <%= submit_tag "Search XSS" %>
+<% end %>
+
+<% if @results_xss.present? %>
+  <h3>XSS Results</h3>
+  <p><%= @results_xss %></p>
+<% end %>
+
+<%= link_to "Create New Booking", new_booking_path, class: "btn btn-primary" %>
+
+<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>

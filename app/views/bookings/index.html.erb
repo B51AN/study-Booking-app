@@ -1,0 +1,20 @@
+<h1>My Bookings</h1>
+
+<% if @bookings.any? %>
+  <% @bookings.each do |booking| %>
+    <p>
+      <strong>Room Number:</strong> <%= booking.room_number %><br>
+      <strong>Subject:</strong> <%= booking.subject %>
+    </p>
+  <% end %>
+<% else %>
+  <p>No bookings found.</p>
+<% end %>
+
+<p>
+  <%= link_to "Create New Booking", new_booking_path, class: "btn btn-primary" %>
+</p>
+
+<p>
+  <%= link_to "Back to Home", root_path, class: "btn btn-secondary" %>
+</p>
